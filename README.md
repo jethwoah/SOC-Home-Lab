@@ -2,7 +2,7 @@
 
 ---
 
-## 2. Short Intro / Summary and Lab Diagram
+## Introduction / Summary and Lab Diagram
 
 This project is a SOC-style home lab built to practice endpoint telemetry analysis using Kali Linux, a Windows VM, Sysmon, and Splunk. The goal was to generate controlled suspicious activity in an isolated virtual lab, collect the resulting logs, and investigate them from a SOC analyst perspective.
 
@@ -13,7 +13,9 @@ flowchart LR
     B -->|Sysmon logs| C[Splunk]
     C -->|Search + investigation| D[SOC analysis]
 ```
+
 ![SOC home lab topology showing Kali, Windows, Sysmon, and Splunk](screenshots/Overall_Topology.png)
+
 ---
 ## Pre-requisites for this Lab
 
@@ -53,6 +55,7 @@ To do this we must first find out the IP address of each VM.
 
 Here we can see that the Kali VM was assigned the IP address of 10.0.2.3, while the Windows VM was assigned 10.0.2.15. These were assigned by our DHCP server (VirtualBox)
 ![Lab environment](screenshots/Kali_IP.png)
+
 ![Lab environment](screenshots/Win_IP.png)
 
 Then we can proceed to performing the ping commands. Using the commmand
@@ -63,6 +66,7 @@ The ping from our Kali Machine fails. But this does not mean that there is no co
 ![Lab environment](screenshots/Kali_Ping.png)
 
 If we ping from our Windows Machine instead, we can see that the ping succeeds. This verifies that there is 2-way connectivity between our VMs.
+
 ![Lab environment](screenshots/Win_Ping.png)
 
 
@@ -120,9 +124,11 @@ We can now build our payload using the command:
          - sets the output format as a Windows executable file.
      - -o document.pdf.exe
          - saves the output file with that filename.
+
 ![Lab environment](screenshots/msfvenom_build.png)
 
 We can verify if the payload has been generated simply by using "ls" which lists the file in the current directory
+
 ![Lab environment](screenshots/msfvenom_ls.png)
 
 ---
@@ -136,6 +142,7 @@ We can initiate msfconsole through the command:
 
 Then to tell Metasploit to load the multi/handler module, which is used to wait for and catch an incoming reverse connection from your Windows VM, we can use the command:
  - use exploit/multi/handler
+
 ![Lab environment](screenshots/handler.png)
 
 #### Step 4.2: Configure Handler
@@ -154,6 +161,7 @@ Then we can enter "options" again to verify our changes.
 #### Step 4.3: Initiate Handler
 Now that we have configured the handler, we can initiate it to start listening on the port and lhost ip for the test machine to execute the malware. Use the command
  - exploit
+
 ![Lab environment](screenshots/exploit.png)
 
 Our payload and handler are now ready.
@@ -168,6 +176,7 @@ We can use Apache for the web server, but for simplicity, we will use Python. We
 This starts a simple temporary web server from the current folder, using port `9999`, so another machine in the lab can open `http://<Kali-IP>:9999` and download files from that folder.
  - http.server http= built-in simple web server module
  - 9999 = port number to host it on
+
 ![Lab environment](screenshots/webserver.png)
 
  -     Our setup for the Kali Machine is now complete.
@@ -196,6 +205,7 @@ Seeing the downloaded file, we can see that windows explorer does not show file 
 Thus it is best practice the enable view of file extensions within Windows Explorer.
 
 This reveals that the file is a .exe rightaway.
+
 ![Lab environment](screenshots/with_fileextension.png)
 
 ---
@@ -213,9 +223,11 @@ This shows active network connections on Windows, with details.
  - -b = show the program/exe using the connection
 
 We can see that connection back to 10.0.2.3 (our Kali VM) through port 4444 has been established. Along with its corresponing Process ID or PID.
+
 ![Lab environment](screenshots/network_anob.png)
 
 We can also verify this by checking Task manager
+
 ![Lab environment](screenshots/task_manager.png)
 
 ---
@@ -226,6 +238,7 @@ We can also verify this by checking Task manager
 Going back to our Kali Machine, we can see that a connection back to the Windows VM has been established.
 
 This is significant as it indicates that there is now connection between the Kali and Windows Machine
+
 ![Lab environment](screenshots/handler_established.png)
 
 #### Step 9.2: Establish shell connection to Windows VM
@@ -247,6 +260,7 @@ To generate telemetry fort this lab, we can simply use discovery commands to our
      - Shows local groups on the machine, like Administrators, Users, Remote Desktop Users, etc.
  - ipconfig
      - Shows the Windows machine’s network info, including IP address, subnet mask, and default gateway.
+
 ![Lab environment](screenshots/discovery.png)
 
 ---
@@ -256,6 +270,7 @@ To generate telemetry fort this lab, we can simply use discovery commands to our
 Assuming that configuration for Splunk and the Sysmon App for Splunk are configured, we can finally investigate the logs from Sysmon ingested by Splunk.
 
 #### Step 11.1: Log into Splunk
+
 ![Lab environment](screenshots/splunk_login.png)
 
 #### Step 11.2: Search for all ingested logs from Sysmon
@@ -300,6 +315,7 @@ We can filter our search for the payload document.pdf.exe,
 ```spl
 index=endpoint 10.0.2.3 document.pdf.exe
 ```
+
 ![Lab environment](screenshots/investigate_malware.png)
 
 Again, because of the Sysmon App we installed in Splunk, we can see different fields. We can use the “EventCode”, specifically EventCode 1
@@ -309,9 +325,13 @@ Again, because of the Sysmon App we installed in Splunk, we can see different fi
 Investigating the event, we can find useful information including:
  - Parent Process and its corresponding Process ID (PID)
  - Child Process and its corresponding Process ID (PID)
+
 ![Lab environment](screenshots/parent.png)
+
 ![Lab environment](screenshots/parent_PID.png)
+
 ![Lab environment](screenshots/child.png)
+
 ![Lab environment](screenshots/child_PID.png)
 
 This is of interest for a SOC Analyst because we have confirmed a parent-child process relationship between document.pdf.exe and cmd.exe. We can look further into this by looking at the actual commands done by the child process.
