@@ -46,7 +46,7 @@ VirtualBox will act as the DCHP server and will asign our VMs with their own IP 
 
 #### Step 1.2: Check Connectivity between VMs
 
-We can verify that the two VMs can communicate with each other by using ping. Ping uses ICMP to test for 2-way conenctivity between 2 network devices.
+We can verify that the two VMs can communicate with each other by using ping. Ping uses ICMP to test for 2-way connectivity between 2 network devices.
 
 To do this we must first find out the IP address of each VM. 
  - For Linux: ifconfig
