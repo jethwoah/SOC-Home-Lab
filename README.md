@@ -17,7 +17,7 @@ flowchart LR
     B -->|Sysmon logs| C[Splunk]
     C -->|Search + investigation| D[SOC analysis]
 ```
-
+![SOC home lab topology showing Kali, Windows, Sysmon, and Splunk](screenshots/Overall_Topology.png)
 ---
 
 ## 3. Step-by-Step Walkthrough Including Splunk Investigation
