@@ -4,7 +4,7 @@
 
 ## Introduction / Summary and Lab Diagram
 
-This project is a SOC-style home lab built to practice endpoint telemetry analysis using Kali Linux, a Windows VM, Sysmon, and Splunk. The goal was to generate controlled suspicious activity in an isolated virtual lab, collect the resulting logs, and investigate them from a SOC analyst perspective.
+This project is a SOC home lab built to practice endpoint telemetry analysis using Kali Linux, a Windows VM, Sysmon, and Splunk. The goal of this home lab is to generate telemetry in an isolated virtual lab, collect the resulting logs, and investigate them from a SOC analyst perspective.
 
 ```mermaid
 flowchart LR
@@ -408,7 +408,7 @@ flowchart TD
     F --> G[Discovery commands executed]
     G --> H[Sysmon records activity]
     H --> I[Splunk ingests logs]
-    I --> J[SOC-style investigation]
+    I --> J[SOC investigation]
 ```
 
 ---
