@@ -30,7 +30,7 @@ The lab uses two virtual machines on the same VirtualBox NAT Network:
 * Windows VM
 The Windows VM was configured with Sysmon and Splunk so endpoint activity could be collected and searched.
 
-![Lab environment](screenshots/01-lab-environment.png)
+![Lab environment](screenshots/Screenshot_2026-06-24_004142.png)
 
 ---
 ### Step 1: NAT Network Setup
