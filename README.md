@@ -105,7 +105,7 @@ msfvenom is a tool from the Metasploit Framework used to generate payloads for s
 For our case, we can use one of msfvenom's prebuilt payloads. To view these prebuilt payloads we can use the command:
  - msfvenom -l payloads
 
-We are specifically interested in windows/x64/meterpreter_reverse_tcp, because it can establish a connection back to the Windows VM later on.
+We are specifically interested in windows/x64/meterpreter_reverse_tcp, because it can establish a connection back to the Windows VM.
 
 ![Lab environment](screenshots/msfvenom_payloads.png)
 
