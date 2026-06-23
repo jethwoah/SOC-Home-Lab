@@ -25,7 +25,7 @@ Splunk and Sysmon App for Splunk must be configured on the Windows VM.
 
 ## Step-by-Step Walkthrough Including Splunk Investigation
 
-### Step 1: Lab Environment Setup
+### Step 0: Lab Environment Setup
 
 The lab uses two virtual machines on the same VirtualBox NAT Network:
 * Kali Linux VM
