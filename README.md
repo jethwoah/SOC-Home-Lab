@@ -247,7 +247,7 @@ We can establish shell to the test machine. A shell is a CLI where you type comm
 
 ![Lab environment](screenshots/shell.png)
 
-Now that we have established a connection to the Windows VM, this indicates that the malware was successful. We can now finally generate our telemetry. Realistically, from this position, an attacker can do much more damage to the Windows VM being given access via shell, such as collect sensitive information, perform malicious commands, and such. But for this lab, our goal is to only geneate telemetry and investigate it later in Splunk.
+Now that we have established a connection to the Windows VM, this indicates that the malware was successful. We can now finally generate our telemetry. Realistically, from this position, an attacker can do much more damage to the Windows VM being given access via shell, such as collect sensitive information, perform malicious commands, privelege escalation, perform lateral movement, and such. But for this lab, our goal is to only geneate telemetry and investigate it later in Splunk.
 
 ---
 
