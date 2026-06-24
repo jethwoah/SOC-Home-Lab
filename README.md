@@ -242,12 +242,12 @@ This is significant as it indicates that there is now connection between the Kal
 
 #### Step 9.2: Establish shell connection to Windows VM
 
-Now that we have established a connection to the Windows VM, this indicates that the malware was successful. We can now finally generate our telemetry. Realistically, from this position, an attacker can do much more damage to the Windows VM being given access via shell, such as collect sensitive information, perform malicious commands, and such. But for this lab, our goal is to only geneate telemetry and investigate it later in Splunk.
-
 We can establish shell to the test machine. A shell is a CLI where you type commands to control a device. The shell commands drops us from the Meterpreter prompt into the Windows machine’s normal command prompt, so we can run Windows commands as if we are sitting on that VM. Use the command:
  - shell
 
 ![Lab environment](screenshots/shell.png)
+
+Now that we have established a connection to the Windows VM, this indicates that the malware was successful. We can now finally generate our telemetry. Realistically, from this position, an attacker can do much more damage to the Windows VM being given access via shell, such as collect sensitive information, perform malicious commands, and such. But for this lab, our goal is to only geneate telemetry and investigate it later in Splunk.
 
 ---
 
