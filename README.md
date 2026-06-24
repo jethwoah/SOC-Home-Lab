@@ -295,7 +295,7 @@ index=endpoint 10.0.2.3
 With the Sysmon App for Splunk, these events are automatically parsed and we are given useful fields we can use. Such as dest_port.
 
 Investigating these Events further, we can see that connections from 10.0.2.3 only used two ports, 3389 and 4444, and 16 out of 19 times, it was port 3389 which is the RDP Port. 
-As a SOC Analyst, this must be raise suspicion. Why is this machine connecting to the RDP port? This could be an indicator of an attempt for desktop scanning or probing. And is this IP or Machine even authorized to use RDP in the first place?
+As a SOC Analyst, this must raise suspicion. Why is this machine connecting to the RDP port? This could be an indicator of an attempt for desktop scanning or probing. And is this IP or Machine even authorized to use RDP in the first place?
 
 ![Lab environment](screenshots/splunk_destports.png)
 
